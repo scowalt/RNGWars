@@ -3,8 +3,8 @@ var express = require('express');
 var util = require('util');
 
 // MODULE IMPORTS
-var prefs = require(__dirname + '/config/prefs.js');
-var secrets = require(__dirname + '/config/secrets');
+var prefs = require(__dirname + '/prefs/prefs.js');
+var secrets = require(__dirname + '/prefs/secrets');
 
 var app = express();
 

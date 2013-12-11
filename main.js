@@ -1,6 +1,7 @@
 // LIBRARY IMPORTS
 var express = require('express');
 var util = require('util');
+var force = require('express-force-domain')
 
 // MODULE IMPORTS
 var prefs = require(__dirname + '/prefs/prefs.js');
@@ -19,8 +20,8 @@ app.configure(function() {
   app.use(express.methodOverride());
   app.use(express.static(__dirname + '/public'));
   app.use(express.session({ secret: 'keyboard cat' }));
+  app.use(force(prefs.serverUrl));
   app.use(app.router);
-  app.use(express.static(__dirname + '/public'));
 });
 
 app.listen(prefs.port);

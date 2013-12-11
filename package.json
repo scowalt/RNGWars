@@ -4,6 +4,7 @@
 	"dependencies": {
 		"crypto": ">= 0.0.0",
 		"express": ">= 0.0.0",
+		"express-force-domain": ">= 0.0.0",
 		"ejs": ">= 0.0.0",
 		"mongoose": ">= 0.0.0"
 	}

@@ -1,10 +1,10 @@
 {
-	"name": "bettit",
+	"name": "rngwars",
+	"version": "0.0.0",
 	"dependencies": {
 		"crypto": ">= 0.0.0",
 		"express": ">= 0.0.0",
 		"ejs": ">= 0.0.0",
-		"passport": ">= 0.0.0",
-		"passport-facebook": ">= 0.0.0"
+		"mongoose": ">= 0.0.0"
 	}
 }

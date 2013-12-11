@@ -5,6 +5,7 @@ var util = require('util');
 // MODULE IMPORTS
 var prefs = require(__dirname + '/prefs/prefs.js');
 var secrets = require(__dirname + '/prefs/secrets');
+var routes = require(__dirname + '/routes');
 
 var app = express();
 
@@ -23,3 +24,5 @@ app.configure(function() {
 });
 
 app.listen(prefs.port);
+
+app.get('/', routes.index);

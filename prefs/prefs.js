@@ -8,3 +8,5 @@ exports.logging = {
 };
 
 exports.serverUrl = "http://rngwars.com";
+
+exports.encryptionAlgorithm = 'aes-256-cbc';

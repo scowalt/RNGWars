@@ -3,10 +3,13 @@
 	"version": "0.0.0",
 	"dependencies": {
 		"captchagen": ">= 0.0.0",
+		"connect-redis": ">= 0.0.0",
 		"crypto": ">= 0.0.0",
 		"express": ">= 0.0.0",
 		"express-force-domain": ">= 0.0.0",
 		"ejs": ">= 0.0.0",
+		"session.socket.io": ">= 0.0.0",
+		"socket.io": ">= 0.0.0",
 		"mongoose": ">= 0.0.0"
 	}
 }

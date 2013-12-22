@@ -19,6 +19,8 @@ var sessionStore = new RedisStore(secrets.redis);
 var cookieParser = express.cookieParser(secrets.secret);
 var sessionSockets = new SessionSockets(io, sessionStore, cookieParser);
 
+var sockets = require(__dirname + '/sockets')(sessionSockets);
+
 // configure Express
 app.configure(function() {
 	app.set('views', __dirname + '/views');
@@ -29,19 +31,14 @@ app.configure(function() {
 	app.use(express.methodOverride());
 	app.use(express.static(__dirname + '/public'));
 	app.use(express.session({
-		secret: secrets.secret
+		store: sessionStore
 	}));
 	app.use(force(prefs.serverUrl));
 	app.use(app.router);
 });
 
 // socket routing
-sessionSockets.on('connection', function(err, socket, session) {
-	if (err) {
-		colog.error(err);
-		return;
-	}
-});
+io.sockets.on('connection', sockets.connection);
 
 // express (web) routing
 app.get('/', routes.index);

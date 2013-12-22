@@ -1,7 +1,7 @@
 // LIBRARY IMPORTS
 var express = require('express');
 var util = require('util');
-var force = require('express-force-domain')
+var force = require('express-force-domain');
 
 // MODULE IMPORTS
 var prefs = require(__dirname + '/prefs/prefs.js');

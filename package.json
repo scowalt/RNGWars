@@ -3,6 +3,7 @@
 	"version": "0.0.0",
 	"dependencies": {
 		"captchagen": ">= 0.0.0",
+		"colog": ">= 0.0.0",
 		"connect-redis": ">= 0.0.0",
 		"crypto": ">= 0.0.0",
 		"express": ">= 0.0.0",

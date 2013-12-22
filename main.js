@@ -1,4 +1,5 @@
 // LIBRARY IMPORTS
+var colog = require('colog');
 var express = require('express');
 var force = require('express-force-domain');
 var IO = require('socket.io');
@@ -20,16 +21,27 @@ var sessionSockets = new SessionSockets(io, sessionStore, cookieParser);
 
 // configure Express
 app.configure(function() {
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'ejs');
-  if (prefs.logging.express) app.use(express.logger());
-  app.use(cookieParser);
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.static(__dirname + '/public'));
-  app.use(express.session({ secret: secrets.secret }));
-  app.use(force(prefs.serverUrl));
-  app.use(app.router);
+	app.set('views', __dirname + '/views');
+	app.set('view engine', 'ejs');
+	if (prefs.logging.express) app.use(express.logger());
+	app.use(cookieParser);
+	app.use(express.bodyParser());
+	app.use(express.methodOverride());
+	app.use(express.static(__dirname + '/public'));
+	app.use(express.session({
+		secret: secrets.secret
+	}));
+	app.use(force(prefs.serverUrl));
+	app.use(app.router);
 });
 
+// socket routing
+sessionSockets.on('connection', function(err, socket, session) {
+	if (err) {
+		colog.error(err);
+		return;
+	}
+});
+
+// express (web) routing
 app.get('/', routes.index);

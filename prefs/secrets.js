@@ -1,1 +1,0 @@
-exports.secret = 'shark $hark sh@rk'

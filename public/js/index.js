@@ -15,13 +15,14 @@ $(document).ready(function() {
 		var captcha = $('#captcha_answer').val();
 
 		if (submit) {
-			return io.emit('register', {
+			io.emit('register', {
 				username: username,
 				password: password1,
 				captchaAttempt: captcha,
 				captchaSolution: window.captchaSolution
 			});
 		}
+		return;
 	});
 
 	function validateUsername(username) {

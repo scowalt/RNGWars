@@ -5,7 +5,6 @@ var force = require('express-force-domain');
 var IO = require('socket.io');
 var RedisStore = require('connect-redis')(express);
 var SessionSockets = require('session.socket.io');
-var util = require('util');
 
 // MODULE IMPORTS
 var prefs = require(__dirname + '/prefs/prefs.js');

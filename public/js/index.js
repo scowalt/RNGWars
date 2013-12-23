@@ -15,7 +15,18 @@ $(document).ready(function() {
 	});
 
 	function validateUsername(username) {
-		if (typeof username !== 'string')
-			return;
+		$input = $('#register_username');
+		if (typeof username !== 'string' ||
+			username.length < 3 ||
+			username.match(/[A-Za-z0-9]*/)[0] !== username) {
+			$input.parent().addClass('has-error')
+			$input.siblings('label').text('Username - invalid username');
+			return false;
+		} else {
+			$input.parent().removeClass('has-error');
+			$input.siblings('label').text('Username');
+			return true;
+		}
+		
 	};
 });

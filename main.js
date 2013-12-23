@@ -39,7 +39,9 @@ app.configure(function() {
 });
 
 // socket routing
-io.sockets.on('connection', sockets.connection);
+io.sockets.on('connection', function(socket){
+	socket.on('register', sockets.register);
+});
 
 // express (web) routing
 app.get('/', routes.index);

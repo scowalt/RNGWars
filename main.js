@@ -15,6 +15,7 @@ var routes = require(__dirname + '/routes');
 // SETUP
 var app = express();
 var io = IO.listen(app.listen(prefs.port));
+io.set('log level', prefs.logging.socket);
 var sessionStore = new RedisStore(secrets.redis);
 var cookieParser = express.cookieParser(secrets.secret);
 var sessionSockets = new SessionSockets(io, sessionStore, cookieParser);

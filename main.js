@@ -20,7 +20,7 @@ var sessionStore = new RedisStore(secrets.redis);
 var cookieParser = express.cookieParser(secrets.secret);
 var sessionSockets = new SessionSockets(io, sessionStore, cookieParser);
 
-var sockets = require(__dirname + '/sockets')(sessionSockets);
+var socketHandler = require(__dirname + '/sockets');
 
 // configure Express
 app.configure(function() {
@@ -40,7 +40,7 @@ app.configure(function() {
 
 // socket routing
 io.sockets.on('connection', function(socket){
-	socket.on('register', sockets.register);
+	socketHandler(sessionSockets, socket);
 });
 
 // express (web) routing

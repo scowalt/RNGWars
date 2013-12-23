@@ -1,9 +1,9 @@
-module.exports = function onRequire(sessionSockets) {
-	var connection = require(__dirname + '/connection')(sessionSockets);
-	var register = require(__dirname + '/register')(sessionSockets);
+var colog = require('colog');
 
-	return {
-		connection: connection,
-		register: register
-	};
+module.exports = function onConnection(sessionSockets, socket) {
+	colog.info("Received socket connection");
+
+	var register = require(__dirname + '/register')(sessionSockets, socket);
+
+	socket.on('register', register);
 }

@@ -12,7 +12,7 @@ $(document).ready(function() {
 		var password2 = $('#register_password2').val();
 		if (!validatePassword(password1, password2)) submit = false;
 
-		var captcha = $('#captcha').val();
+		var captcha = $('#captcha_answer').val();
 
 		if (submit) {
 			return io.emit('register', {
@@ -54,4 +54,10 @@ $(document).ready(function() {
 			return true;
 		}
 	}
+
+	io.on('incorrect_captcha', function(data){
+		$('#captcha_img').attr('src', data.captcha.image);
+		window.captchaSolution = data.captcha.solution;
+		$('#captcha_img').parent().parent().addClass('has-error');
+	})
 });

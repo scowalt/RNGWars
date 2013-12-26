@@ -1,5 +1,6 @@
 var captcha = require('../utils/captcha.js');
 var colog = require('colog');
+var db = require('../models');
 
 module.exports = function onRequire(sessionSockets, socket) {
 	return function onRegister(data) {
@@ -14,6 +15,7 @@ module.exports = function onRequire(sessionSockets, socket) {
 			// correct captcha, register account
 			var valid = validateAccountInfo(data);
 			if (valid){
+				colog.info("Valid account info, creating account");
 				createAccount(data);
 			} else {
 				colog.error('invalid account info');
@@ -32,5 +34,18 @@ module.exports = function onRequire(sessionSockets, socket) {
 			return false;
 		}
 		return true;
+	}
+
+	function createAccount(data){
+		var username = data.username;
+		var password = data.password;
+		db.User.register(new db.User({ username : username}), password, function onCreation(err, account){
+			if (err){
+				colog.error("Error in user registration");
+				throw err; // TODO Get rid of this
+			}
+			colog.info("Account created, redirecting user");
+			socket.emit('redirect', '/game');
+		})
 	}
 };

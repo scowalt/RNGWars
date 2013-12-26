@@ -56,9 +56,13 @@ $(document).ready(function() {
 		}
 	}
 
-	io.on('incorrect_captcha', function(data){
+	io.on('incorrect_captcha', function onNewCaptcha(data){
 		$('#captcha_img').attr('src', data.captcha.image);
 		window.captchaSolution = data.captcha.solution;
 		$('#captcha_img').parent().parent().addClass('has-error');
+	});
+
+	io.on('redirect', function onRedirect(path){
+		window.location = path;
 	})
 });

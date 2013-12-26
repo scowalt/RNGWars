@@ -9,6 +9,9 @@
 		"express": ">= 0.0.0",
 		"express-force-domain": ">= 0.0.0",
 		"ejs": ">= 0.0.0",
+		"passport": ">= 0.0.0",
+		"passport-local": ">= 0.0.0",
+		"passport-local-mongoose": ">= 0.0.0",
 		"session.socket.io": ">= 0.0.0",
 		"socket.io": ">= 0.0.0",
 		"mongoose": ">= 0.0.0"

@@ -1,14 +1,7 @@
 var mongoose = require('mongoose');
 
+// passport-local-mongoose will add username and password
 module.exports = new mongoose.Schema({
-	username: {
-		type: String,
-		index: true
-	},
-	password: {
-		type: String,
-		index: false
-	},
 	email: {
 		type: String,
 		index: true

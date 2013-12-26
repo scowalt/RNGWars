@@ -10,6 +10,7 @@ var SessionSockets = require('session.socket.io');
 var prefs = require(__dirname + '/prefs/prefs.js');
 var secrets = require(__dirname + '/prefs/secrets');
 var routes = require(__dirname + '/routes');
+var db = require(__dirname + '/models');
 
 // SETUP
 var app = express();
@@ -33,9 +34,17 @@ app.configure(function() {
 	app.use(express.session({
 		store: sessionStore
 	}));
+	app.use(passport.initialize());
+	app.use(passport.session());
 	app.use(force(prefs.serverUrl));
 	app.use(app.router);
 });
+
+// configure passport
+passport.use(new LocalStrategy(db.Account.authenticate()));
+
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
 
 // socket routing
 io.sockets.on('connection', function(socket){

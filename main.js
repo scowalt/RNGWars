@@ -3,6 +3,8 @@ var colog = require('colog');
 var express = require('express');
 var force = require('express-force-domain');
 var IO = require('socket.io');
+var LocalStrategy = require('passport-local').Strategy;
+var passport = require('passport');
 var RedisStore = require('connect-redis')(express);
 var SessionSockets = require('session.socket.io');
 
@@ -41,10 +43,10 @@ app.configure(function() {
 });
 
 // configure passport
-passport.use(new LocalStrategy(db.Account.authenticate()));
+passport.use(new LocalStrategy(db.User.authenticate()));
 
-passport.serializeUser(Account.serializeUser());
-passport.deserializeUser(Account.deserializeUser());
+passport.serializeUser(db.User.serializeUser());
+passport.deserializeUser(db.User.deserializeUser());
 
 // socket routing
 io.sockets.on('connection', function(socket){

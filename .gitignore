@@ -1,3 +1,4 @@
 /prefs/secrets.js
 sftp-config.json
 *.sublime-workspace
+*.conf

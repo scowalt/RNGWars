@@ -5,5 +5,6 @@ module.exports = {
 		res.render('index', {
 			captcha: captcha.createCaptcha()
 		});
-	}
+	},
+	game : require(__dirname + '/game')
 }

@@ -8,6 +8,7 @@ module.exports = function onRequire(passport) {
 			});
 		},
 		game: require(__dirname + '/game'),
-		login: require(__dirname + '/login')(passport)
+		login: require(__dirname + '/login')(passport),
+		logout: require(__dirname + '/logout')
 	};
 }

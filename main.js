@@ -58,3 +58,4 @@ io.sockets.on('connection', function(socket){
 app.get('/', routes.index);
 app.get('/game', middleware.ensureAuthenticated, routes.game);
 app.get('/login', routes.login);
+app.get('/logout', routes.logout);

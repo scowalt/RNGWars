@@ -12,8 +12,9 @@ module.exports = function onRequire(sessionSockets, socket) {
 				captcha: captcha.createCaptcha()
 			});
 		} else {
-			// correct captcha, register account
+			// correct captcha
 			var valid = validateAccountInfo(data);
+			var duplicate = duplicateUser(data);
 			if (valid){
 				colog.info("Valid account info, creating account");
 				createAccount(data);
@@ -36,15 +37,23 @@ module.exports = function onRequire(sessionSockets, socket) {
 		return true;
 	}
 
+	function duplicateUser(data){
+
+	}
+
 	function createAccount(data){
 		var username = data.username;
 		var password = data.password;
-		db.User.register(new db.User({ username : username}), password, function onCreation(err, account){
+		db.User.register(new db.User({username : username, stylized_username : username}), password, function onCreation(err, account){
 			if (err){
 				colog.error("Error in user registration");
-				throw err; // TODO Get rid of this
+				if (err.message === 'User already exists with name ' + username){
+					socket.emit('duplicate_user');
+				} else {
+					throw err;
+				}
+				return;
 			}
-			colog.info("Account created, redirecting user");
 			socket.emit('redirect', '/game');
 		})
 	}

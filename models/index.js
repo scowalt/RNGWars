@@ -3,7 +3,9 @@ var passportLocalMongoose = require('passport-local-mongoose');
 var secrets = require('../prefs/secrets');
 
 var User = require(__dirname + '/user');
-User.plugin(passportLocalMongoose);
+User.plugin(passportLocalMongoose, {
+	usernameLowerCase: true
+});
 
 mongoose.connect('mongodb://' + secrets.mongo.user + ':' + secrets.mongo.pass + '@localhost/RNGWars');
 

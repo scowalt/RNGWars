@@ -12,7 +12,7 @@ var SessionSockets = require('session.socket.io');
 var middleware = require(__dirname + '/middleware');
 var prefs = require(__dirname + '/prefs/prefs.js');
 var secrets = require(__dirname + '/prefs/secrets');
-var routes = require(__dirname + '/routes');
+var routes = require(__dirname + '/routes')(passport);
 var db = require(__dirname + '/models');
 
 // SETUP
@@ -57,3 +57,4 @@ io.sockets.on('connection', function(socket){
 // express (web) routing
 app.get('/', routes.index);
 app.get('/game', middleware.ensureAuthenticated, routes.game);
+app.get('/login', routes.login);

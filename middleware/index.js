@@ -1,3 +1,3 @@
 module.exports = {
-	ensureAuthenticated : require(__dirname + '/auth')
+	ensureAuthenticated: require(__dirname + '/ensureAuth')
 }
